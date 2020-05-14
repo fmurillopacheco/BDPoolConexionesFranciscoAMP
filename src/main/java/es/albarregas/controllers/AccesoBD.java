@@ -19,12 +19,11 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.enterprise.context.spi.Context;
 import javax.naming.InitialContext;
+import javax.naming.NamingException;
 import javax.servlet.ServletConfig;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
 import javax.sql.DataSource;
 
 /**
@@ -35,11 +34,16 @@ import javax.sql.DataSource;
 public class AccesoBD extends HttpServlet {
 
 DataSource dataSource;
+
+@Override
 public void init(ServletConfig config) throws ServletException{
     try{
-        Context contextoIncial= new InitialContext();
-        dataSource=(DataSource) contextoInicial.lookup()
-        
+        InitialContext contextoInicial= new InitialContext();
+        dataSource=(DataSource) contextoInicial.lookup("jdbc/BDPool");
+        	} catch(NamingException ex) {
+		System.out.println("Problemas en el acceso a la Base de Batos...");
+		ex.printStackTrace();
+	}
     }
 }
     
@@ -54,23 +58,16 @@ public void init(ServletConfig config) throws ServletException{
         ResultSet resultado = null;
 
         Ave ave = null;
-        ArrayList<Ave> aves = null;
+        List<Ave> listado = null;
 
-        try {
-            Class.forName("com.mysql.jdbc.Driver");
-        } catch (ClassNotFoundException ex) {
-            System.out.println("No existe el driver");
-            ex.printStackTrace();
-        }
-
-        String cadenaConexion = "jdbc:mysql://localhost:3306/pruebasjava";
-        String anilla = request.getParameter("una");
+        String anilla= request.getParameter("anilla");
         String url = null;
         String sql = null;
 
+        
         try {
-            conexion = DriverManager.getConnection(cadenaConexion, "java2019", "2019");
-
+            conexion = datasource.getParametertg;
+/*
             if (request.getParameter("anilla") != null) {
                 if (anilla != null && anilla != "") {
 
@@ -183,14 +180,7 @@ public void init(ServletConfig config) throws ServletException{
 
     }
 
-    /**
-     * Returns a short description of the servlet.
-     *
-     * @return a String containing servlet description
-     */
-    @Override
-    public String getServletInfo() {
-        return "Short description";
-    }// </editor-fold>
-
+*/          }
+        }   
+    }
 }

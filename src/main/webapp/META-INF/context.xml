@@ -1,2 +1,14 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<Context path="/DBPoolConexionesFranciscoAMP"/>
+<Context path="/DBPoolConexionesFranciscoAMP">
+    <Resource
+        name="jdbc/BDPool"
+        auth="Container"
+        type="javax.sql.DataSource"
+        maxActive="100"
+        maxIdle="30"
+        maxWait="10000"
+        username="java2019"
+        password="2019"
+        driverClassName="com.mysql.jdbc.Driver"
+        url="jdbc:mysql://localhost:3306/pruebasJAVA?autoReconnect=true" />
+</Context>    
